@@ -1,0 +1,23 @@
+{
+  "presets": [
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-runtime"
+  ],
+  "env": {
+    "TEST": {
+      "auxiliaryCommentBefore": "istanbul ignore next",
+      "ignore": false
+    },
+    "BUILD": {
+      "compact": false,
+      "comments": true
+    },
+    "DIST": {
+      "compact": true,
+      "comments": false
+    }
+  }
+}
