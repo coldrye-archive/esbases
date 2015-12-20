@@ -1,6 +1,6 @@
 {
   "name": "esbases",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Assorted base classes for native classes so that they can be subclassed properly when using Babel 6.x.",
   "keywords": [
     "native", "babel", "es2015", "error", "number", "subclass", "class", "extend", "es", "base"
@@ -27,30 +27,33 @@
   "files": [
     "*"
   ],
+  "scripts": {
+    "prepublish": "test \"${MASTER}\" = \"1\" || (echo ${npm_config_argv} | grep -E '(install|update)' >/dev/null 2>/dev/null || (echo 'use *make publish* instead' && exit 1))"
+  },
   "dependencies": {
-    "babel-runtime": ">=6.2.4"
+    "babel-runtime": "^6.2.4"
   },
   "devDependencies": {
-    "babel-plugin-external-helpers-2": ">=6.3.x",
-    "babel-plugin-transform-runtime": ">=6.3.x",
-    "babel-plugin-undeclared-variables-check": ">=6.3.x",
-    "babel-preset-es2015": ">=6.3.x",
-    "babel-preset-stage-0": ">=6.3.x",
-    "esaver": ">=0.0.3",
-    "esdoc-es7-plugin": ">=0.0.3",
-    "esdoc-importpath-plugin": ">=0.0.1",
-    "glob": ">=6.0.1"
+    "babel-plugin-external-helpers-2": "^6.3.x",
+    "babel-plugin-transform-runtime": "^6.3.x",
+    "babel-plugin-undeclared-variables-check": "^6.3.x",
+    "babel-preset-es2015": "^6.3.x",
+    "babel-preset-stage-0": "^6.3.x",
+    "esaver": "^0.0.3",
+    "esdoc-es7-plugin": "^0.0.3",
+    "esdoc-importpath-plugin": "^0.0.1",
+    "glob": "^6.0.1"
   },
   "globalDevDependencies": {
-    "babel": ">=6.3.x",
-    "babel-cli": ">=6.3.x",
-    "babel-core": ">=6.3.x",
-    "babel-eslint": ">=4.1.1",
-    "babel-istanbul": ">=0.3.20",
-    "babel-traverse": ">=6.3.19",
-    "esdoc": ">=0.3.1",
-    "eslint": ">=1.3.1",
-    "eslint-config-coldrye": ">=0.0.9",
-    "mocha": ">=2.2.5"
+    "babel": "^6.3.x",
+    "babel-cli": "^6.3.x",
+    "babel-core": "^6.3.x",
+    "babel-eslint": "^4.1.1",
+    "babel-istanbul": "^0.3.20",
+    "babel-traverse": "^6.3.19",
+    "esdoc": "^0.3.1",
+    "eslint": "^1.3.1",
+    "eslint-config-coldrye": "^0.0.9",
+    "mocha": "^2.2.5"
   }
 }
