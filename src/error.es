@@ -6,22 +6,16 @@
  *
  * @class
  * @private
- * @param {string} [message] - the message
  * @returns {void}
  */
-function ProtoError(message)
-{
-    this._base = new Error(message);
-}
-
+function ProtoError()
+{}
 ProtoError.prototype = new Error();
 Object.setPrototypeOf(ProtoError, Error);
 
 
 /**
  * The class EsError models the base of a hierarchy of derived classes.
- *
- * FIXME:stack trace
  *
  * @public
  */
@@ -33,7 +27,19 @@ export default class EsError extends ProtoError
      */
     constructor(message)
     {
-        super(message);
+        super();
+
+        this._message = message;
+
+        // we need a proper stack trace here
+        try
+        {
+            throw new Error(message);
+        }
+        catch (error)
+        {
+            this._base = error;
+        }
     }
 
     /**
@@ -41,7 +47,19 @@ export default class EsError extends ProtoError
      */
     get message()
     {
-        return this._base.message;
+        return this._message;
+    }
+
+    /**
+     * @override
+     */
+    get stack()
+    {
+        // augment the stack trace so that it
+        // starts with the original calling site
+        let stack = this._base.stack.split('\n');
+        stack.splice(1, 1);
+        return stack.join('\n').replace(/^Error/, this.constructor.name);
     }
 
     /**

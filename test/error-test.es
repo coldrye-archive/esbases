@@ -18,16 +18,30 @@ function ()
     describe('instances of EsError',
     function ()
     {
+        const cut = new EsError('message');
+        const org = new Error();
+
         it('must be instances of EsError',
         function ()
         {
-            assert.ok(new EsError() instanceof EsError);
+            assert.ok(cut instanceof EsError);
         });
 
         it('must be instances of Error',
         function ()
         {
-            assert.ok(new EsError() instanceof Error);
+            assert.ok(cut instanceof Error);
+        });
+
+        it('must have the expected stack trace',
+        function ()
+        {
+            let cstack = cut.stack.split('\n');
+            let ostack = org.stack.split('\n');
+            assert.equal('EsError: message', cstack[0]);
+            cstack.splice(0, 2);
+            ostack.splice(0, 2);
+            assert.deepEqual(ostack, cstack);
         });
     });
 
