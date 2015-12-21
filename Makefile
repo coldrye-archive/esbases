@@ -187,7 +187,7 @@ lint: $(sources) $(tests)
 
 
 publish: clean dist
-	@cd ${dist_dir} && npm publish
+	@cd ${dist_dir} && MASTER=1 npm publish
 
 
 # tests everything
