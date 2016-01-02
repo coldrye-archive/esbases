@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -38,24 +38,45 @@ Object.setPrototypeOf(ProtoError, Error);
 export default class EsError extends ProtoError
 {
     /**
-     * @param {string} [message] - the message
+     * @param {string} message? - the optional message
+     * @param {string} cause? - the optional cause
      * @returns {void}
      */
-    constructor(message)
+    constructor(message, cause)
     {
         super();
 
-        this._message = message;
+        let actualCause = cause;
+        let actualMessage = message;
+
+        if (message instanceof Error)
+        {
+            actualCause = message;
+            actualMessage = actualCause.message;
+        }
+
+        this._cause = actualCause;
+        this._message = actualMessage;
 
         // we need a proper stack trace here
         try
         {
-            throw new Error(message);
+            throw new Error(actualMessage);
         }
         catch (error)
         {
             this._base = error;
         }
+    }
+
+    /**
+     * Gets the causing exception.
+     *
+     * @returns {Error} - the causing exception or null
+     */
+    get cause()
+    {
+        return this._cause;
     }
 
     /**
@@ -71,11 +92,19 @@ export default class EsError extends ProtoError
      */
     get stack()
     {
-        // augment the stack trace so that it
-        // starts with the original calling site
+        // adjust stack trace so that it matches the callsite
         let stack = this._base.stack.split('\n');
         stack.splice(1, 1);
-        return stack.join('\n').replace(/^Error/, this.constructor.name);
+        let result = [
+            stack.join('\n').replace(/^Error/, this.constructor.name)
+        ];
+        let cause = this.cause;
+        if (cause)
+        {
+            result = result.concat(['', 'caused by', '', cause.stack]);
+        }
+
+        return result.join('\n');
     }
 
     /**

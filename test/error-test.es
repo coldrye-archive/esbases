@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -35,6 +35,8 @@ function ()
     {
         const cut = new EsError('message');
         const org = new Error();
+        const cut2 = new EsError('message', org);
+        const cut3 = new EsError(org);
 
         it('must be instances of EsError',
         function ()
@@ -57,6 +59,27 @@ function ()
             cstack.splice(0, 2);
             ostack.splice(0, 2);
             assert.deepEqual(ostack, cstack);
+        });
+
+        it('must have the expected cause and message',
+        function ()
+        {
+            assert.equal('message', cut2.message);
+            assert.deepEqual(org, cut2.cause);
+        });
+
+        it('must have the expected cause and empty string message',
+        function ()
+        {
+            assert.equal('', cut3.message);
+            assert.deepEqual(org, cut3.cause);
+        });
+
+        it('must include cause stack trace when present',
+        function ()
+        {
+            assert.notEqual(-1, cut2.stack.indexOf('caused by'));
+            assert.notEqual(-1, cut2.stack.indexOf(org.stack));
         });
     });
 
