@@ -18,8 +18,37 @@ So, if you ever ran into these problems, then **esbases** is definitely for you.
 
 ## Project Site
 
-The project site, see (3) under resources below, provides more insight into the project,
+The project site, see (2) under resources below, provides more insight into the project,
 including test coverage reports and API documentation.
+
+
+## Contributing
+
+You are very welcome to propose changes and report bugs, or even provide pull
+requests on [github](https://github.com/coldrye-es/esbases).
+
+See the [contributing guidelines](https://github.com/coldrye-es/esbases/blob/master/CONTRIBUTING.md) for more information.
+
+
+### Contributors
+
+ - [Carsten Klein](https://github.com/silkentrance) **Maintainer**
+
+
+## Runtime Dependencies
+
+ - [babel-runtime](https://github.com/babel/babel)
+
+
+## Development Dependencies
+
+See [esmake](https://github.com/coldrye-es/esmake#development-dependencies) for more information on development dependencies.
+
+
+## Building
+
+See [esmake](https://github.com/coldrye-es/esmake#build-process) and the targets listed under
+[esmake](https://github.com/coldrye-es/esmake#makefilesoftwarein) for more information on how to build this.
 
 
 ## Installation
@@ -38,21 +67,16 @@ import EsError from 'esbases/error';
 
 class MyError extends EsError
 {
-    constructor(message, cause)
+    constructor(message, cause, data)
     {
-        super(message);
-        this._cause = cause;
+        super(message, cause);
+
+        this._data = data;
     }
 
-    get cause()
+    get data()
     {
-        return this._cause;
-    }
-
-    toString()
-    {
-        let result = super.toString();
-        return result + ' caused by: ' + this._cause;
+        return this._data;
     }
 }
 ```
@@ -94,6 +118,5 @@ See https://github.com/loganfsmyth/babel-plugin-transform-builtin-extend.
 ## Resources
 
  - (1) [Github Site](https://github.com/coldrye-es/esbases)
- - (2) [Keith Cirkel on "Why we should stop using Grunt & Gulp"](http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt)
- - (3) [Project Site](http://esbases.es.coldrye.eu)
+ - (2) [Project Site](http://esbases.es.coldrye.eu)
 
