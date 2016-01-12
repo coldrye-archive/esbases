@@ -140,13 +140,13 @@ function ()
         it('must accept Number value',
         function ()
         {
-            assert.deepEqual(new EsNumber(new Number(1)), new EsNumber(1));
+            assert.deepEqual(new EsNumber(1), new EsNumber(new Number(1)));
         });
 
         it('must accept EsNumber value',
         function ()
         {
-            assert.deepEqual(new EsNumber(new EsNumber(1)), new EsNumber(1));
+            assert.deepEqual(new EsNumber(1), new EsNumber(new EsNumber(1)));
         });
     });
 
@@ -166,41 +166,41 @@ function ()
         it('must return expected value',
         function ()
         {
-            assert.equal(new EsNumber(1).valueOf(), 1);
+            assert.equal(1, new EsNumber(1).valueOf());
         });
     });
 
     it('#toString() must return expected value',
     function ()
     {
-        assert.equal(new EsNumber(5).toString(), '5');
+        assert.equal('5', new EsNumber(5).toString());
     });
 
     it('#toLocaleString() must return expected value',
     function ()
     {
         assert.equal(
-            '1000',
-            new EsNumber(1000).toLocaleString('en-US', {useGrouping:false})
+            new EsNumber(1000).toLocaleString('en-US', {useGrouping:false}),
+            '1000'
         );
     });
 
     it('#toFixed() must return expected value',
     function ()
     {
-        assert.equal('1.00', new EsNumber(1).toFixed(2));
+        assert.equal(new EsNumber(1).toFixed(2), '1.00');
     });
 
     it('#toExponential() must return expected value',
     function ()
     {
-        assert.equal('1.00e+0', new EsNumber(1).toExponential(2));
+        assert.equal(new EsNumber(1).toExponential(2), '1.00e+0');
     });
 
     it('#toPrecision() must return expected value',
     function ()
     {
-        assert.equal('1.000', new EsNumber(1).toPrecision(4));
+        assert.equal(new EsNumber(1).toPrecision(4), '1.000');
     });
 });
 

@@ -64,22 +64,22 @@ function ()
         it('must have the expected cause and message',
         function ()
         {
-            assert.equal('message', cut2.message);
-            assert.deepEqual(org, cut2.cause);
+            assert.equal(cut2.message, 'message');
+            assert.deepEqual(cut2.cause, org);
         });
 
         it('must have the expected cause and empty string message',
         function ()
         {
-            assert.equal('', cut3.message);
+            assert.equal(cut3.message, '');
             assert.deepEqual(org, cut3.cause);
         });
 
         it('must include cause stack trace when present',
         function ()
         {
-            assert.notEqual(-1, cut2.stack.indexOf('caused by'));
-            assert.notEqual(-1, cut2.stack.indexOf(org.stack));
+            assert.notEqual(cut2.stack.indexOf('caused by'), -1);
+            assert.notEqual(cut2.stack.indexOf(org.stack), -1);
         });
     });
 
@@ -97,13 +97,13 @@ function ()
             it('must have the expected message property',
             function ()
             {
-                assert.equal('message', markerError.message);
+                assert.equal(markerError.message, 'message');
             });
 
             it('toString() must return expected value',
             function ()
             {
-                assert.equal('[MarkerError: message]', markerError.toString());
+                assert.equal(markerError.toString(), '[MarkerError: message]');
             });
 
             it('must be an instance of Error',
@@ -153,21 +153,21 @@ function ()
             it('must have the expected data property',
             function ()
             {
-                assert.equal('data', errorWithProperties.data);
+                assert.equal(errorWithProperties.data, 'data');
             });
 
             it('must have the expected message property',
             function ()
             {
-                assert.equal('message', errorWithProperties.message);
+                assert.equal(errorWithProperties.message, 'message');
             });
 
             it('toString() must return expected value',
             function ()
             {
                 assert.equal(
-                    '[ErrorWithProperties: message]',
-                    errorWithProperties.toString()
+                    errorWithProperties.toString(),
+                    '[ErrorWithProperties: message]'
                 );
             });
 

@@ -39,12 +39,12 @@ function ()
         };
 
         EsNumber.install();
-        assert.notEqual(origParseFloat, window.parseFloat);
-        assert.notEqual(origParseInt, window.parseInt);
+        assert.notEqual(window.parseFloat, origParseFloat);
+        assert.notEqual(window.parseInt, origParseInt);
 
         EsNumber.uninstall();
-        assert.equal(origParseFloat, window.parseFloat);
-        assert.equal(origParseInt, window.parseInt);
+        assert.equal(window.parseFloat, origParseFloat);
+        assert.equal(window.parseInt, origParseInt);
 
         delete global.window;
     });
