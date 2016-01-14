@@ -6,7 +6,7 @@
     "native", "babel", "es2015", "error", "number", "subclass", "class", "extend", "es", "base"
   ],
   "license": "Apache-2.0",
-  "homepage": "http://es.coldrye.eu/esbases",
+  "homepage": "http://esbases.es.coldrye.eu/",
   "bugs": {
     "url": "https://github.com/coldrye-es/esbases/issues"
   },
