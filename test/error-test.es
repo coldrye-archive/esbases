@@ -50,7 +50,7 @@ function ()
             assert.ok(cut instanceof Error);
         });
 
-        it('must have the expected stack trace',
+        it('#stack must return correct value',
         function ()
         {
             let cstack = cut.stack.split('\n');
@@ -61,18 +61,18 @@ function ()
             assert.deepEqual(ostack, cstack);
         });
 
-        it('must have the expected cause and message',
+        it('#message must have correct value',
         function ()
         {
             assert.equal(cut2.message, 'message');
-            assert.deepEqual(cut2.cause, org);
+            assert.equal(cut3.message, '');
         });
 
-        it('must have the expected cause and empty string message',
+        it('#cause must have correct value',
         function ()
         {
-            assert.equal(cut3.message, '');
-            assert.deepEqual(org, cut3.cause);
+            assert.deepEqual(cut2.cause, org);
+            assert.deepEqual(cut3.cause, org);
         });
 
         it('must include cause stack trace when present',
@@ -86,24 +86,41 @@ function ()
     describe('Derived Classes of EsError',
     function ()
     {
+        const TEST_MSG = 'message with extra info';
+
         class MarkerError extends EsError
-        {}
+        {
+            get message()
+            {
+                return super.message + ' with extra info';
+            }
+        }
 
         let markerError = new MarkerError('message');
 
         describe('first level derivates',
         function ()
         {
-            it('must have the expected message property',
+            it('#message must return correct value',
             function ()
             {
-                assert.equal(markerError.message, 'message');
+                assert.equal(markerError.message, TEST_MSG);
             });
 
-            it('toString() must return expected value',
+            it('#toString() must return correct value',
             function ()
             {
-                assert.equal(markerError.toString(), '[MarkerError: message]');
+                assert.equal(
+                    markerError.toString(), '[MarkerError: ' + TEST_MSG + ']'
+                );
+            });
+
+            it('#stack must include the correct message',
+            function ()
+            {
+                assert.equal(
+                    markerError.stack.indexOf('MarkerError: ' + TEST_MSG), 0
+                );
             });
 
             it('must be an instance of Error',
@@ -118,7 +135,7 @@ function ()
                 assert.ok(markerError instanceof MarkerError);
             });
 
-            it('EsError must its prototype',
+            it('EsError must be its prototype',
             function ()
             {
                 assert.ok(EsError.isPrototypeOf(MarkerError));
@@ -150,24 +167,24 @@ function ()
         describe('second level derivates',
         function ()
         {
-            it('must have the expected data property',
+            it('#data must return correct value',
             function ()
             {
                 assert.equal(errorWithProperties.data, 'data');
             });
 
-            it('must have the expected message property',
+            it('#message must return correct value',
             function ()
             {
-                assert.equal(errorWithProperties.message, 'message');
+                assert.equal(errorWithProperties.message, TEST_MSG);
             });
 
-            it('toString() must return expected value',
+            it('#toString() must return expected value',
             function ()
             {
                 assert.equal(
                     errorWithProperties.toString(),
-                    '[ErrorWithProperties: message]'
+                    '[ErrorWithProperties: ' + TEST_MSG + ']'
                 );
             });
 

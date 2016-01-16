@@ -61,7 +61,7 @@ export default class EsError extends ProtoError
         // we need a proper stack trace here
         try
         {
-            throw new Error(actualMessage);
+            throw new Error();
         }
         catch (error)
         {
@@ -96,7 +96,9 @@ export default class EsError extends ProtoError
         let stack = this._base.stack.split('\n');
         stack.splice(1, 1);
         let result = [
-            stack.join('\n').replace(/^Error/, this.constructor.name)
+            stack.join('\n').replace(
+                /^Error/, this.constructor.name + ': ' + this.message
+            )
         ];
         let cause = this.cause;
         if (cause)
