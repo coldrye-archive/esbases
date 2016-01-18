@@ -1,3 +1,13 @@
+<a name="0.0.5"></a>
+## 0.0.5 (2016-01-18)
+
+
+### fix
+
+* fix(error): fixes #4 ([2959366](https://github.com/coldrye-es/esbases/commit/2959366)), closes [#4](https://github.com/coldrye-es/esbases/issues/4)
+
+
+
 <a name="0.0.4"></a>
 ## 0.0.4 (2016-01-16)
 

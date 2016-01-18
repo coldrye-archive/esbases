@@ -92,18 +92,26 @@ export default class EsError extends ProtoError
      */
     get stack()
     {
-        // adjust stack trace so that it matches the callsite
+        // adjust stack trace so that it matches the call site
         let stack = this._base.stack.split('\n');
-        stack.splice(1, 1);
-        let result = [
-            stack.join('\n').replace(
-                /^Error/, this.constructor.name + ': ' + this.message
-            )
-        ];
-        let cause = this.cause;
-        if (cause)
+
+        let index;
+        for (index = 1; index < stack.length; index++)
         {
-            result = result.concat(['', 'caused by', '', cause.stack]);
+            if (!stack[index].match('^\\s*at (new )?' + this.constructor.name))
+            {
+                break;
+            }
+        }
+        stack.splice(0, index);
+
+        let result = [
+            this.constructor.name + ': ' + this.message
+        ].concat(stack);
+
+        if (this.cause)
+        {
+            result = result.concat(['', 'caused by', '', this.cause.stack]);
         }
 
         return result.join('\n');

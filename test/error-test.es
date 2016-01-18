@@ -88,7 +88,7 @@ function ()
     {
         const TEST_MSG = 'message with extra info';
 
-        class MarkerError extends EsError
+        class FirstLevelDerivate extends EsError
         {
             get message()
             {
@@ -96,22 +96,22 @@ function ()
             }
         }
 
-        let markerError = new MarkerError('message');
-
         describe('first level derivates',
         function ()
         {
+            const cut = new FirstLevelDerivate('message');
+
             it('#message must return correct value',
             function ()
             {
-                assert.equal(markerError.message, TEST_MSG);
+                assert.equal(cut.message, TEST_MSG);
             });
 
             it('#toString() must return correct value',
             function ()
             {
                 assert.equal(
-                    markerError.toString(), '[MarkerError: ' + TEST_MSG + ']'
+                    cut.toString(), '[FirstLevelDerivate: ' + TEST_MSG + ']'
                 );
             });
 
@@ -119,36 +119,43 @@ function ()
             function ()
             {
                 assert.equal(
-                    markerError.stack.indexOf('MarkerError: ' + TEST_MSG), 0
+                    cut.stack.indexOf('FirstLevelDerivate: ' + TEST_MSG), 0
                 );
+            });
+
+            it('#stack must not include extraneous information',
+            function ()
+            {
+                const re = new RegExp('^\\s*at (new )? FirstLevelDerivate');
+                assert.ok(!cut.stack.match(re));
             });
 
             it('must be an instance of Error',
             function ()
             {
-                assert.ok(markerError instanceof Error);
+                assert.ok(cut instanceof Error);
             });
 
-            it('must be an instance of MarkerError',
+            it('must be an instance of FirstLevelDerivate',
             function ()
             {
-                assert.ok(markerError instanceof MarkerError);
+                assert.ok(cut instanceof FirstLevelDerivate);
             });
 
             it('EsError must be its prototype',
             function ()
             {
-                assert.ok(EsError.isPrototypeOf(MarkerError));
+                assert.ok(EsError.isPrototypeOf(FirstLevelDerivate));
             });
 
             it('Error must be its prototype',
             function ()
             {
-                assert.ok(Error.isPrototypeOf(MarkerError));
+                assert.ok(Error.isPrototypeOf(FirstLevelDerivate));
             });
         });
 
-        class ErrorWithProperties extends MarkerError
+        class SecondLevelDerivate extends FirstLevelDerivate
         {
             constructor(message, data)
             {
@@ -162,68 +169,90 @@ function ()
             }
         }
 
-        let errorWithProperties = new ErrorWithProperties('message', 'data');
-
         describe('second level derivates',
         function ()
         {
+            const cut = new SecondLevelDerivate('message', 'data');
+
             it('#data must return correct value',
             function ()
             {
-                assert.equal(errorWithProperties.data, 'data');
+                assert.equal(cut.data, 'data');
             });
 
             it('#message must return correct value',
             function ()
             {
-                assert.equal(errorWithProperties.message, TEST_MSG);
+                assert.equal(cut.message, TEST_MSG);
             });
 
             it('#toString() must return expected value',
             function ()
             {
                 assert.equal(
-                    errorWithProperties.toString(),
-                    '[ErrorWithProperties: ' + TEST_MSG + ']'
+                    cut.toString(),
+                    '[SecondLevelDerivate: ' + TEST_MSG + ']'
                 );
+            });
+
+            it('#stack must include the correct message',
+            function ()
+            {
+                assert.equal(
+                    cut.stack.indexOf('SecondLevelDerivate: ' + TEST_MSG), 0
+                );
+            });
+
+            it('#stack must not include extraneous information',
+            function ()
+            {
+                const re = new RegExp('^\\s*at (new )? SecondLevelDerivate');
+                assert.ok(!cut.stack.match(re));
             });
 
             it('must be an instance of Error',
             function ()
             {
-                assert.ok(errorWithProperties instanceof Error);
+                assert.ok(cut instanceof Error);
             });
 
-            it('must be an instance of MarkerError',
+            it('must be an instance of FirstLevelDerivate',
             function ()
             {
-                assert.ok(errorWithProperties instanceof MarkerError);
+                assert.ok(cut instanceof FirstLevelDerivate);
             });
 
-            it('must be an instance of ErrorWithProperties',
+            it('must be an instance of SecondLevelDerivate',
             function ()
             {
-                assert.ok(errorWithProperties instanceof ErrorWithProperties);
+                assert.ok(cut instanceof SecondLevelDerivate);
             });
 
-            it('MarkerError must be its prototype',
+            it('FirstLevelDerivate must be its prototype',
             function ()
             {
-                assert.ok(MarkerError.isPrototypeOf(ErrorWithProperties));
+                assert.ok(
+                    FirstLevelDerivate.isPrototypeOf(SecondLevelDerivate)
+                );
             });
 
             it('EsError must be its prototype',
             function ()
             {
-                assert.ok(EsError.isPrototypeOf(ErrorWithProperties));
+                assert.ok(EsError.isPrototypeOf(SecondLevelDerivate));
             });
 
             it('Error must be its prototype',
             function ()
             {
-                assert.ok(Error.isPrototypeOf(ErrorWithProperties));
+                assert.ok(Error.isPrototypeOf(SecondLevelDerivate));
             });
         });
+    });
+
+    describe('regression',
+    function ()
+    {
     });
 });
 
