@@ -19,11 +19,11 @@
 
 
 # The types of API documentation you want to have the system generate.
-doc = pub
+doc = dev pub
 
 
 
-# custom targets and overrides go here
+# custom targets go here
 
 
 
@@ -31,4 +31,7 @@ doc = pub
 # include esmake
 
 include ./node_modules/esmake/Makefile.software.in
+
+
+# custom overrides go here
 

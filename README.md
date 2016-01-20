@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/coldrye-es/esbases.svg?branch=master)](https://travis-ci.org/coldrye-es/esbases)
+[![NPM](https://nodei.co/npm/esbases.png?mini=true)](https://nodei.co/npm/esbases/)
+
 # esbases
 
 Collection of base classes for use with Babel projects. **esbases** provides base
@@ -11,9 +14,15 @@ dysfunctional subclasses such as
 So, if you ever ran into these problems, then **esbases** is definitely for you.
 
 
-## Travis-CI
+## Releases
 
-[![Build Status](https://travis-ci.org/coldrye-es/esbases.svg?branch=master)](https://travis-ci.org/coldrye-es/esbases)
+See the [changelog](https://github.com/coldrye-es/esbases/blob/master/CHANGELOG.md) for more information.
+
+
+## Limitations
+
+- installing the optional, global replacements for ``parseInt`` and ``parseFloat`` can lead
+  to unwanted side effects such as mocha failing to run your test suites
 
 
 ## Project Site
@@ -37,7 +46,9 @@ See the [contributing guidelines](https://github.com/coldrye-es/esbases/blob/mas
 
 ## Runtime Dependencies
 
- - [babel-runtime](https://github.com/babel/babel)
+ - _[babel-runtime](https://github.com/babel/babel)_
+
+**The dependencies listed in _italics_ must be provided by the using project.**
 
 
 ## Development Dependencies
@@ -83,6 +94,9 @@ class MyError extends EsError
 
 
 ### class EsNumber
+
+See limitations above for possible side effects.
+
 
 ```
 import EsNumber from 'esbases/number';
