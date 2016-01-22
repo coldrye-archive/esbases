@@ -1,3 +1,17 @@
+<a name="0.0.6"></a>
+## 0.0.6 (2016-01-22)
+
+
+### chore
+
+* chore(dependencies): made babel-runtime a dev dependency ([7559b9d](https://github.com/coldrye-es/esbases/commit/7559b9d))
+
+### fix
+
+* fix(number): fixes #5 ([f96bb30](https://github.com/coldrye-es/esbases/commit/f96bb30)), closes [#5](https://github.com/coldrye-es/esbases/issues/5)
+
+
+
 <a name="0.0.5"></a>
 ## 0.0.5 (2016-01-18)
 

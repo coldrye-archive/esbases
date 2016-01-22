@@ -64,7 +64,7 @@ export default class EsNumber extends ProtoNumber
             tester = value._base;
         }
 
-        return isNaN(tester);
+        return _isNaN(tester);
     }
 
     /**
@@ -79,7 +79,7 @@ export default class EsNumber extends ProtoNumber
             tester = value._base;
         }
 
-        return isFinite(tester);
+        return _isFinite(tester);
     }
 
     /**
@@ -184,4 +184,16 @@ const _parseFloat = parseFloat;
  * @private
  */
 const _parseInt = parseInt;
+
+
+/**
+ * @private
+ */
+const _isNaN = isNaN;
+
+
+/**
+ * @private
+ */
+const _isFinite = isFinite;
 
