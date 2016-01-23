@@ -44,27 +44,25 @@ See the [contributing guidelines](https://github.com/coldrye-es/esbases/blob/mas
  - [Carsten Klein](https://github.com/silkentrance) **Maintainer**
 
 
-## Runtime Dependencies
-
- - _[babel-runtime](https://github.com/babel/babel)_
-
-**The dependencies listed in _italics_ must be provided by the using project.**
-
-
-## Development Dependencies
-
-See [esmake](https://github.com/coldrye-es/esmake#development-dependencies) for more information on development dependencies.
-
 
 ## Building
 
-See [esmake](https://github.com/coldrye-es/esmake#build-process) and the targets listed under
-[esmake](https://github.com/coldrye-es/esmake#makefilesoftwarein) for more information on how to build this.
+See [build process](https://github.com/coldrye-es/esmake#build-process) and the available [build targets](https://github.com/coldrye-es/esmake#makefilesoftwarein)
+for more information on how to build this.
+
+See also [development dependencies](https://github.com/coldrye-es/esmake#development-dependencies) and on how to deal with them.
 
 
 ## Installation
 
 ``npm --save esbases``
+
+
+### Runtime Dependencies
+
+ - _[babel-runtime](https://github.com/babel/babel)_
+
+**The dependencies denoted in _italics_ must be provided by the using project.**
 
 
 ## Usage
