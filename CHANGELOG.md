@@ -1,3 +1,16 @@
+<a name="0.0.7"></a>
+## 0.0.7 (2016-02-09)
+
+
+* version bump v0.0.7 ([e83c52a](https://github.com/coldrye-es/esbases/commit/e83c52a))
+
+### chore
+
+* chore: update-commons ([8c9ee76](https://github.com/coldrye-es/esbases/commit/8c9ee76))
+* chore(dependencies): removing global babel dependency as it was deprecated ([27dec69](https://github.com/coldrye-es/esbases/commit/27dec69))
+
+
+
 <a name="0.0.6"></a>
 ## 0.0.6 (2016-01-22)
 
