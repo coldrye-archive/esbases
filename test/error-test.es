@@ -33,7 +33,15 @@ function ()
     describe('instances of EsError',
     function ()
     {
-        const cut = new EsError('message');
+        let cut;
+        try
+        {
+            throw new EsError('message');
+        }
+        catch (err)
+        {
+            cut = err;
+        }
         const org = new Error();
         const cut2 = new EsError('message', org);
         const cut3 = new EsError(org);
@@ -99,7 +107,16 @@ function ()
         describe('first level derivates',
         function ()
         {
-            const cut = new FirstLevelDerivate('message');
+            let cut;
+
+            try
+            {
+                throw new FirstLevelDerivate('message');
+            }
+            catch (err)
+            {
+                cut = err;
+            }
 
             it('#message must return correct value',
             function ()
