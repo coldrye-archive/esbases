@@ -7,7 +7,7 @@
 ### chore
 
 * chore(tests): improve error tests by introducing throws instead of just new ([5f1fb8d](https://github.com/coldrye-es/esbases/commit/5f1fb8d))
-* chore(tests): switch from esave to chai,sinon ([bcec31a](https://github.com/coldrye-es/esbases/commit/bcec31a))
+* chore(tests): switch from esaver to chai,sinon ([bcec31a](https://github.com/coldrye-es/esbases/commit/bcec31a))
 
 
 
