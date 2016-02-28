@@ -16,8 +16,6 @@
  */
 
 
-import assert from 'esaver';
-
 import EsNumber from '../src/number';
 
 
@@ -30,8 +28,6 @@ function ()
     it('.install()/.uninstall() with global window available',
     function ()
     {
-        assert.expect(4);
-
         global.window =
         {
             parseFloat : global.parseFloat,
@@ -39,12 +35,12 @@ function ()
         };
 
         EsNumber.install();
-        assert.notEqual(window.parseFloat, origParseFloat);
-        assert.notEqual(window.parseInt, origParseInt);
+        window.parseFloat.should.not.equal(origParseFloat);
+        window.parseInt.should.not.equal(origParseInt);
 
         EsNumber.uninstall();
-        assert.equal(window.parseFloat, origParseFloat);
-        assert.equal(window.parseInt, origParseInt);
+        window.parseFloat.should.equal(origParseFloat);
+        window.parseInt.should.equal(origParseInt);
 
         delete global.window;
     });

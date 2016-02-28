@@ -16,8 +16,6 @@
  */
 
 
-import assert from 'esaver';
-
 import EsNumber from '../src/number';
 
 
@@ -27,13 +25,14 @@ function ()
     it('Number must be its prototype',
     function ()
     {
-        assert.ok(Number.isPrototypeOf(EsNumber));
+        Number.isPrototypeOf(EsNumber).should.be.ok;
     });
 
     it('instances must be instances of Number',
     function ()
     {
-        assert.ok(new EsNumber() instanceof Number);
+        // chai will call valueOf()
+        (new EsNumber() instanceof Number).should.be.ok;
     });
 
     const origParseFloat = parseFloat;
@@ -43,8 +42,8 @@ function ()
     function ()
     {
         EsNumber.install();
-        assert.ok(origParseInt !== parseInt);
-        assert.ok(origParseFloat !== parseFloat);
+        parseInt.should.not.equal(origParseInt);
+        parseFloat.should.not.equal(origParseFloat);
         EsNumber.uninstall();
     });
 
@@ -53,101 +52,54 @@ function ()
     {
         EsNumber.install();
         EsNumber.uninstall();
-        assert.ok(origParseInt === parseInt);
-        assert.ok(origParseFloat === parseFloat);
+        parseInt.should.equal(origParseInt);
+        parseFloat.should.equal(origParseFloat);
     });
 
-    describe('.isNaN()',
+    it('.isNaN() must return true on assorted NaNs',
     function ()
     {
-        it('must return true on EsNumber(Number.NaN)',
-        function ()
-        {
-            assert.ok(EsNumber.isNaN(Number.NaN));
-        });
-
-        it('must return true on EsNumber(new EsNumber(Number.NaN))',
-        function ()
-        {
-            assert.ok(EsNumber.isNaN(new EsNumber(Number.NaN)));
-        });
-
-        it('must return true on assorted NaNs',
-        function ()
-        {
-            assert.ok(EsNumber.isNaN(undefined));
-            assert.ok(EsNumber.isNaN('a'));
-        });
+        EsNumber.isNaN(1).should.not.be.ok;
+        EsNumber.isNaN(Number.NaN).should.be.ok;
+        EsNumber.isNaN(new EsNumber(Number.NaN)).should.be.ok;
+        EsNumber.isNaN(undefined).should.be.ok;
+        EsNumber.isNaN('a').should.be.ok;
     });
 
-    describe('.isFinite()',
+    it('.isFinite() must return expected value',
     function ()
     {
-        it('must return false on EsNumber(Number.NEGATIVE_INFINITY)',
-        function ()
-        {
-            assert.ok(!EsNumber.isFinite(
-                new EsNumber(Number.NEGATIVE_INFINITY)
-            ));
-        });
-
-        it('must return false on Number.POSITIVE_INFINITY',
-        function ()
-        {
-            assert.ok(!EsNumber.isFinite(Number.POSITIVE_INFINITY));
-        });
-
-        it('must return false on EsNumber(Number.POSITIVE_INFINITY)',
-        function ()
-        {
-            assert.ok(!EsNumber.isFinite(
-                new EsNumber(Number.POSITIVE_INFINITY)
-            ));
-        });
+        EsNumber.isFinite(1).should.be.ok;
+        EsNumber.isFinite(Number.POSITIVE_INFINITY).should.not.be.ok;
+        EsNumber.isFinite(
+            new EsNumber(Number.NEGATIVE_INFINITY)
+        ).should.not.be.ok;
+        EsNumber.isFinite(
+            new EsNumber(Number.POSITIVE_INFINITY)
+        ).should.not.be.ok;
+        EsNumber.isFinite(new EsNumber(Number.NAN)).should.not.be.ok;
     });
 
-    describe('.parseFloat()',
+    it('.parseFloat() must return instance of EsNumber',
     function ()
     {
-        it('must return instance of EsNumber',
-        function ()
-        {
-            const actual = EsNumber.parseFloat('0.005');
-            assert.ok(actual instanceof EsNumber);
-        });
+        // chai will call valueOf()
+        (EsNumber.parseFloat('0.005') instanceof EsNumber).should.be.ok;
     });
 
-    describe('.parseInt()',
+    it('.parseInt() must return instance of EsNumber',
     function ()
     {
-        it('must return instance of EsNumber',
-        function ()
-        {
-            const actual = EsNumber.parseInt('5');
-            assert.ok(actual instanceof EsNumber);
-        });
+        // chai will call valueOf()
+        (EsNumber.parseInt('5') instanceof EsNumber).should.be.ok;
     });
 
-    describe('constructor',
+    it('new EsNumber() must accept assorted parameter types',
     function ()
     {
-        it('must accept string value',
-        function ()
-        {
-            assert.deepEqual(new EsNumber('1'), new EsNumber(1));
-        });
-
-        it('must accept Number value',
-        function ()
-        {
-            assert.deepEqual(new EsNumber(1), new EsNumber(new Number(1)));
-        });
-
-        it('must accept EsNumber value',
-        function ()
-        {
-            assert.deepEqual(new EsNumber(1), new EsNumber(new EsNumber(1)));
-        });
+        new EsNumber('1').should.equal(1);
+        new EsNumber(new Number(1)).should.equal(1);
+        new EsNumber(new EsNumber(1)).should.equal(1);
     });
 
     describe('#valueOf()',
@@ -156,51 +108,53 @@ function ()
         it('must not throw not generic error',
         function ()
         {
-            assert.doesNotThrow(
-            function ()
+            function tc()
             {
                 new EsNumber(1).valueOf();
-            });
+            }
+            tc.should.not.throw();
         });
 
         it('must return expected value',
         function ()
         {
-            assert.equal(1, new EsNumber(1).valueOf());
+            new EsNumber(1).valueOf().should.equal(1);
         });
     });
 
     it('#toString() must return expected value',
     function ()
     {
-        assert.equal('5', new EsNumber(5).toString());
+        new EsNumber(5).toString().should.equal('5');
     });
 
     it('#toLocaleString() must return expected value',
     function ()
     {
-        assert.equal(
-            new EsNumber(1000).toLocaleString('en-US', {useGrouping:false}),
-            '1000'
-        );
+        new EsNumber(1000).toLocaleString(
+            'en-US', {useGrouping:false}
+        ).should.equal('1000');
+        new EsNumber(1000).toLocaleString(
+            'en-US', {useGrouping:true}
+        ).should.equal('1,000');
     });
 
     it('#toFixed() must return expected value',
     function ()
     {
-        assert.equal(new EsNumber(1).toFixed(2), '1.00');
+        new EsNumber(1).toFixed(2).should.equal('1.00');
     });
 
     it('#toExponential() must return expected value',
     function ()
     {
-        assert.equal(new EsNumber(1).toExponential(2), '1.00e+0');
+        new EsNumber(1).toExponential(2).should.equal('1.00e+0');
     });
 
     it('#toPrecision() must return expected value',
     function ()
     {
-        assert.equal(new EsNumber(1).toPrecision(4), '1.000');
+        new EsNumber(1).toPrecision(4).should.equal('1.000');
     });
 });
 

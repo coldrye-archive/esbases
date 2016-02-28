@@ -1,3 +1,16 @@
+<a name="0.0.8"></a>
+## 0.0.8 (2016-02-28)
+
+
+* version bump v0.0.8 ([d981d55](https://github.com/coldrye-es/esbases/commit/d981d55))
+
+### chore
+
+* chore(tests): improve error tests by introducing throws instead of just new ([5f1fb8d](https://github.com/coldrye-es/esbases/commit/5f1fb8d))
+* chore(tests): switch from esave to chai,sinon ([bcec31a](https://github.com/coldrye-es/esbases/commit/bcec31a))
+
+
+
 <a name="0.0.7"></a>
 ## 0.0.7 (2016-02-09)
 

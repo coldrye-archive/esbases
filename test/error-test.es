@@ -16,8 +16,6 @@
  */
 
 
-import assert from 'esaver';
-
 import EsError from '../src/error';
 
 
@@ -27,7 +25,7 @@ function ()
     it('Error must be its prototype',
     function ()
     {
-        assert.ok(Error.isPrototypeOf(EsError));
+        Error.isPrototypeOf(EsError).should.be.ok;
     });
 
     describe('instances of EsError',
@@ -49,45 +47,45 @@ function ()
         it('must be instances of EsError',
         function ()
         {
-            assert.ok(cut instanceof EsError);
+            cut.should.be.an.instanceOf(EsError);
         });
 
         it('must be instances of Error',
         function ()
         {
-            assert.ok(cut instanceof Error);
+            cut.should.be.an.instanceOf(Error);
         });
 
-        it('#stack must return correct value',
+        it('#stack must have expected value',
         function ()
         {
             let cstack = cut.stack.split('\n');
             let ostack = org.stack.split('\n');
-            assert.equal('EsError: message', cstack[0]);
+            cstack[0].should.equal('EsError: message');
             cstack.splice(0, 2);
             ostack.splice(0, 2);
-            assert.deepEqual(ostack, cstack);
+            cstack.should.deep.equal(ostack);
         });
 
-        it('#message must have correct value',
+        it('#message must have expected value',
         function ()
         {
-            assert.equal(cut2.message, 'message');
-            assert.equal(cut3.message, '');
+            cut2.message.should.equal('message');
+            cut3.message.should.equal('');
         });
 
-        it('#cause must have correct value',
+        it('#cause must have expected value',
         function ()
         {
-            assert.deepEqual(cut2.cause, org);
-            assert.deepEqual(cut3.cause, org);
+            cut2.cause.should.deep.equal(org);
+            cut3.cause.should.deep.equal(org);
         });
 
         it('must include cause stack trace when present',
         function ()
         {
-            assert.notEqual(cut2.stack.indexOf('caused by'), -1);
-            assert.notEqual(cut2.stack.indexOf(org.stack), -1);
+            cut2.stack.should.contain('caused by');
+            cut2.stack.should.contain(org.stack);
         });
     });
 
@@ -100,7 +98,7 @@ function ()
         {
             get message()
             {
-                return super.message + ' with extra info';
+                return `${super.message} with extra info`;
             }
         }
 
@@ -118,57 +116,55 @@ function ()
                 cut = err;
             }
 
-            it('#message must return correct value',
+            it('#message must have expected value',
             function ()
             {
-                assert.equal(cut.message, TEST_MSG);
+                cut.message.should.equal(TEST_MSG);
             });
 
-            it('#toString() must return correct value',
+            it('#toString() must return expected value',
             function ()
             {
-                assert.equal(
-                    cut.toString(), '[FirstLevelDerivate: ' + TEST_MSG + ']'
+                cut.toString().should.equal(
+                    `[FirstLevelDerivate: ${TEST_MSG}]`
                 );
             });
 
-            it('#stack must include the correct message',
+            it('#stack must include expected message',
             function ()
             {
-                assert.equal(
-                    cut.stack.indexOf('FirstLevelDerivate: ' + TEST_MSG), 0
-                );
+                cut.stack.should.contain(`FirstLevelDerivate: ${TEST_MSG}`);
             });
 
             it('#stack must not include extraneous information',
             function ()
             {
                 const re = new RegExp('^\\s*at (new )? FirstLevelDerivate');
-                assert.ok(!cut.stack.match(re));
+                should.not.exist(cut.stack.match(re));
             });
 
             it('must be an instance of Error',
             function ()
             {
-                assert.ok(cut instanceof Error);
+                cut.should.be.an.instanceOf(Error);
             });
 
             it('must be an instance of FirstLevelDerivate',
             function ()
             {
-                assert.ok(cut instanceof FirstLevelDerivate);
+                cut.should.be.an.instanceOf(FirstLevelDerivate);
             });
 
             it('EsError must be its prototype',
             function ()
             {
-                assert.ok(EsError.isPrototypeOf(FirstLevelDerivate));
+                EsError.isPrototypeOf(FirstLevelDerivate).should.be.ok;
             });
 
             it('Error must be its prototype',
             function ()
             {
-                assert.ok(Error.isPrototypeOf(FirstLevelDerivate));
+                Error.isPrototypeOf(FirstLevelDerivate).should.be.ok;
             });
         });
 
@@ -191,85 +187,77 @@ function ()
         {
             const cut = new SecondLevelDerivate('message', 'data');
 
-            it('#data must return correct value',
+            it('#data must have expected value',
             function ()
             {
-                assert.equal(cut.data, 'data');
+                cut.data.should.equal('data');
             });
 
-            it('#message must return correct value',
+            it('#message must have expected value',
             function ()
             {
-                assert.equal(cut.message, TEST_MSG);
+                cut.message.should.equal(TEST_MSG);
             });
 
             it('#toString() must return expected value',
             function ()
             {
-                assert.equal(
-                    cut.toString(),
-                    '[SecondLevelDerivate: ' + TEST_MSG + ']'
+                cut.toString().should.equal(
+                    `[SecondLevelDerivate: ${TEST_MSG}]`
                 );
             });
 
-            it('#stack must include the correct message',
+            it('#stack must include expected message',
             function ()
             {
-                assert.equal(
-                    cut.stack.indexOf('SecondLevelDerivate: ' + TEST_MSG), 0
-                );
+                cut.stack.should.contain(`SecondLevelDerivate: ${TEST_MSG}`);
             });
 
             it('#stack must not include extraneous information',
             function ()
             {
                 const re = new RegExp('^\\s*at (new )? SecondLevelDerivate');
-                assert.ok(!cut.stack.match(re));
+                should.not.exist(cut.stack.match(re));
             });
 
             it('must be an instance of Error',
             function ()
             {
-                assert.ok(cut instanceof Error);
+                cut.should.be.an.instanceOf(Error);
             });
 
             it('must be an instance of FirstLevelDerivate',
             function ()
             {
-                assert.ok(cut instanceof FirstLevelDerivate);
+                cut.should.be.an.instanceOf(FirstLevelDerivate);
             });
 
             it('must be an instance of SecondLevelDerivate',
             function ()
             {
-                assert.ok(cut instanceof SecondLevelDerivate);
+                cut.should.be.an.instanceOf(SecondLevelDerivate);
             });
 
             it('FirstLevelDerivate must be its prototype',
             function ()
             {
-                assert.ok(
-                    FirstLevelDerivate.isPrototypeOf(SecondLevelDerivate)
-                );
+                FirstLevelDerivate.isPrototypeOf(
+                    SecondLevelDerivate
+                ).should.be.ok;
             });
 
             it('EsError must be its prototype',
             function ()
             {
-                assert.ok(EsError.isPrototypeOf(SecondLevelDerivate));
+                EsError.isPrototypeOf(SecondLevelDerivate).should.be.ok;
             });
 
             it('Error must be its prototype',
             function ()
             {
-                assert.ok(Error.isPrototypeOf(SecondLevelDerivate));
+                Error.isPrototypeOf(SecondLevelDerivate).should.be.ok;
             });
         });
-    });
-
-    describe('regression',
-    function ()
-    {
     });
 });
 
