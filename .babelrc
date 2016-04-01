@@ -9,7 +9,9 @@
   "env": {
     "TEST": {
       "auxiliaryCommentBefore": "istanbul ignore next",
-      "ignore": false
+      "ignore": false,
+      "comments": true,
+      "retainLines": true
     },
     "BUILD": {
       "compact": false,
