@@ -41,8 +41,7 @@ See the [contributing guidelines](https://github.com/coldrye-es/esbases/blob/mas
 
 ### Contributors
 
- - [Carsten Klein](https://github.com/silkentrance) **Maintainer**
-
+See [contributors](https://github.com/coldrye-es/esbases/graphs/contributors) for more information.
 
 
 ## Building
