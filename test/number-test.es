@@ -35,27 +35,6 @@ function ()
         (new EsNumber() instanceof Number).should.be.ok;
     });
 
-    const origParseFloat = parseFloat;
-    const origParseInt = parseInt;
-
-    it('.install() must replace global parseInt and parseFloat',
-    function ()
-    {
-        EsNumber.install();
-        parseInt.should.not.equal(origParseInt);
-        parseFloat.should.not.equal(origParseFloat);
-        EsNumber.uninstall();
-    });
-
-    it('.uninstall() must restore the original parseInt and parseFloat',
-    function ()
-    {
-        EsNumber.install();
-        EsNumber.uninstall();
-        parseInt.should.equal(origParseInt);
-        parseFloat.should.equal(origParseFloat);
-    });
-
     it('.isNaN() must return true on assorted NaNs',
     function ()
     {

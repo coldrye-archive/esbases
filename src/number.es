@@ -64,7 +64,7 @@ export default class EsNumber extends ProtoNumber
             tester = value._base;
         }
 
-        return _isNaN(tester);
+        return isNaN(tester);
     }
 
     /**
@@ -79,7 +79,7 @@ export default class EsNumber extends ProtoNumber
             tester = value._base;
         }
 
-        return _isFinite(tester);
+        return isFinite(tester);
     }
 
     /**
@@ -88,7 +88,7 @@ export default class EsNumber extends ProtoNumber
      */
     static parseFloat(value)
     {
-        return new EsNumber(_parseFloat(value));
+        return new EsNumber(parseFloat(value));
     }
 
     /**
@@ -97,31 +97,7 @@ export default class EsNumber extends ProtoNumber
      */
     static parseInt(value)
     {
-        return new EsNumber(_parseInt(value));
-    }
-
-    /**
-     * Installs the global replacements for esParseInt and esParseNumber.
-     *
-     * @returns {void}
-     */
-    static install()
-    {
-        let gobj = typeof window == 'undefined' ? global : window;
-        gobj.parseFloat = EsNumber.parseFloat.bind(EsNumber);
-        gobj.parseInt = EsNumber.parseInt.bind(EsNumber);
-    }
-
-    /**
-     * Uninstalls the global replacements for esParseInt and esParseNumber.
-     *
-     * @returns {void}
-     */
-    static uninstall()
-    {
-        let gobj = typeof window == 'undefined' ? global : window;
-        gobj.parseFloat = _parseFloat;
-        gobj.parseInt = _parseInt;
+        return new EsNumber(parseInt(value));
     }
 
     /**
@@ -172,28 +148,4 @@ export default class EsNumber extends ProtoNumber
         return this._base.valueOf();
     }
 }
-
-
-/**
- * @private
- */
-const _parseFloat = parseFloat;
-
-
-/**
- * @private
- */
-const _parseInt = parseInt;
-
-
-/**
- * @private
- */
-const _isNaN = isNaN;
-
-
-/**
- * @private
- */
-const _isFinite = isFinite;
 
