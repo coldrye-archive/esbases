@@ -39,7 +39,7 @@ export default class EsError extends ProtoError
 {
     /**
      * @param {string} message? - the optional message
-     * @param {string} cause? - the optional cause
+     * @param {Error} cause? - the optional cause
      * @returns {void}
      */
     constructor(message, cause)
