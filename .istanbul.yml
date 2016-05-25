@@ -26,6 +26,6 @@ reporting:
 check:
     global:
         branches: 100
-        functions: 100
+        functions: 80
         lines: 100
-        statements: 100
+        statements: 90
