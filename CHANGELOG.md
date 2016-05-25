@@ -1,3 +1,26 @@
+<a name="0.0.9"></a>
+## [0.0.9](https://github.com/coldrye-es/esbases/compare/v0.0.8...v0.0.9) (2016-05-25)
+
+
+### Chores
+
+* **dependency:** conventional-changelog broke existing contract ([40afc37](https://github.com/coldrye-es/esbases/commit/40afc37))
+* **dependencies:** add dependency towards conventional-changelog-coldrye ([b590ab7](https://github.com/coldrye-es/esbases/commit/b590ab7))
+* **dependencies:** dependency towards eslint-config-coldrye is too specific ([377d7e7](https://github.com/coldrye-es/esbases/commit/377d7e7))
+* **dependencies:** upgrade all dependencies to newer mininum versions ([c05347f](https://github.com/coldrye-es/esbases/commit/c05347f))
+
+
+### Documentation
+
+* **ESError:** cause is of type Error ([a5bf01b](https://github.com/coldrye-es/esbases/commit/a5bf01b))
+* **README:** link to contributors @ github instead ([4cb0451](https://github.com/coldrye-es/esbases/commit/4cb0451))
+
+
+* BREAKING CHANGE: removed install/uninstall as it breaks existing javascript contract ([f71aa25](https://github.com/coldrye-es/esbases/commit/f71aa25))
+* version bump v0.0.9 ([9eb6bdc](https://github.com/coldrye-es/esbases/commit/9eb6bdc))
+
+
+
 <a name="0.0.8"></a>
 ## 0.0.8 (2016-02-28)
 

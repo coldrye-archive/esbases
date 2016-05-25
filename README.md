@@ -19,12 +19,6 @@ So, if you ever ran into these problems, then **esbases** is definitely for you.
 See the [changelog](https://github.com/coldrye-es/esbases/blob/master/CHANGELOG.md) for more information.
 
 
-## Limitations
-
-- installing the optional, global replacements for ``parseInt`` and ``parseFloat`` can lead
-  to unwanted side effects such as mocha failing to run your test suites
-
-
 ## Project Site
 
 The project site, see (2) under resources below, provides more insight into the project,
@@ -92,26 +86,14 @@ class MyError extends EsError
 
 ### class EsNumber
 
-See limitations above for possible side effects.
-
-
 ```
 import EsNumber from 'esbases/number';
 
-// install global replacements parseFloat/parseInt (optional)
-EsNumber.install();
-
-const num1 = parseFloat('0.005');
+const num1 = ESNumber.parseFloat('0.005');
 // -> EsNumber('0.005')
 
-// uninstall global replacements again
-EsNumber.uninstall();
-
-const num2 = parseInt('5');
-// -> Number('5')
-
-const num3 = EsNumber.parseFloat('5.005');
-// -> EsNumber('5.005')
+const num2 = ESNumber.parseInt('5');
+// -> EsNumber('5')
 ```
 
 
